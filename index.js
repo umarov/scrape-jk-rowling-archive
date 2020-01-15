@@ -16,8 +16,7 @@ const run = async () => {
 
   for (let link of LINKS) {
     await page.goto(link, { waitUntil: 'networkidle0' })
-    const pdf = await page.pdf({ format: 'A4' });
-    await promises.writeFile(`${link.split('/')[4]}.pdf`, pdf)
+    await page.pdf({ format: 'A4', printBackground: true, path: `${link.split('/')[4]}.pdf` });
     await page.screenshot({
       path: `${link.split('/')[4]}.png`,
       fullPage: true
